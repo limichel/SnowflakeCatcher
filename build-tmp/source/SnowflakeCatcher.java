@@ -1,8 +1,24 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class SnowflakeCatcher extends PApplet {
+
 SnowFlake [] snow;
 Flower [] pinkflowers;
 Orange [] oranges;
 
-void setup()
+public void setup()
 {
   size(600, 600);
   background(0);
@@ -25,7 +41,7 @@ void setup()
 
 int what = 1;
 
-void draw()
+public void draw()
 {
   //background(0);
   rect(0, 600, 600, 10);
@@ -64,7 +80,7 @@ void draw()
   }
 }
 
-void keyPressed()
+public void keyPressed()
 {
   if(key == 'q')
   {
@@ -93,9 +109,10 @@ void keyPressed()
     }
     what = 3;
   }
+  System.out.println(what);
 }
 
-void mouseDragged()
+public void mouseDragged()
 {
   noStroke();
   if(mouseButton == LEFT)
@@ -127,13 +144,13 @@ class SnowFlake
     y = (int)(Math.random() * 600);
     isMoving = true;
   }
-  void show()
+  public void show()
   {
     noStroke();
     fill(255);
     ellipse(x, y, 2, 2);
   }
-  void lookDown()
+  public void lookDown()
   {
     int c = color(0);
     if(y >= 0 && y < 600 && get(x, y+3) != c)
@@ -145,7 +162,7 @@ class SnowFlake
       isMoving = true;
     }
   }
-  void erase()
+  public void erase()
   {
     fill(0);
     ellipse(x, y-2, 3, 3);
@@ -156,14 +173,14 @@ class SnowFlake
       ellipse(myX, myY, 3, 3);
     }
   }
-  void move()
+  public void move()
   {
     if(isMoving == true)
     {
       y = y + (int)(Math.random() * 2) + 1;
     }
   }
-  void wrap()
+  public void wrap()
   {
     if(y >= 596)
     {
@@ -183,7 +200,7 @@ class Flower
     y = (int)(Math.random() * 600);
     isMoving = true;
   }
-  void show()
+  public void show()
   {
     noStroke();
     fill(255, 153, 204);
@@ -194,7 +211,7 @@ class Flower
     ellipse(x-1, y+2, 2, 2);
     ellipse(x-2, y, 2, 2);
   }
-  void lookDown()
+  public void lookDown()
   {
     int c = color(0);
     if(y >= 0 && y < 600 && get(x, y+4) != c)
@@ -206,21 +223,21 @@ class Flower
       isMoving = true;
     }
   }
-  void erase()
+  public void erase()
   {
     fill(0);
     int myX = x;
     int myY = y;
     ellipse(myX, myY, 7, 7);
   }
-  void move()
+  public void move()
   {
     if(isMoving == true)
     {
       y = y + (int)(Math.random() * 2) + 1;
     }
   }
-  void wrap()
+  public void wrap()
   {
     if(y >= 595)
     {
@@ -244,7 +261,7 @@ class Orange
     y = (int)(Math.random() * 600);
     isMoving = true;
   }
-  void show()
+  public void show()
   {
     noStroke();
     fill(255,127,80);
@@ -252,7 +269,7 @@ class Orange
     fill(223, 86, 76);
     ellipse(x+1, y-1, 3, 3);
   }
-  void lookDown()
+  public void lookDown()
   {
     int c = color(0);
     if(y >= 0 && y < 600 && get(x, y+7) != c)
@@ -264,7 +281,7 @@ class Orange
       isMoving = true;
     }
   }
-  void erase()
+  public void erase()
   {
     noStroke();
     fill(0);
@@ -272,14 +289,14 @@ class Orange
     int myY = y;
     ellipse(myX, myY, 11, 11);
   }
-  void move()
+  public void move()
   {
     if(isMoving == true)
     {
       y = y + (int)(Math.random() * 2) + 1;
     }
   }
-  void wrap()
+  public void wrap()
   {
     if(y >= 590)
     {
@@ -290,6 +307,15 @@ class Orange
       noStroke();
       fill(0);
       ellipse(myX, myY, 11, 11); //black circle 
+    }
+  }
+}
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "SnowflakeCatcher" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
     }
   }
 }
